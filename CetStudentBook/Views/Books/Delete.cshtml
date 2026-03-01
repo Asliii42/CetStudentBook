@@ -1,0 +1,33 @@
+﻿@model CetStudentBook.Models.Book
+
+@{
+    ViewData["Title"] = "Delete Book";
+}
+
+<h2>Silme Onayı</h2>
+
+<div class="alert alert-warning">
+    Bu kitabı silmek istediğine emin misin?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Ad</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+
+    <dt class="col-sm-3">Yazar</dt>
+    <dd class="col-sm-9">@Model.Author</dd>
+
+    <dt class="col-sm-3">Tarih</dt>
+    <dd class="col-sm-9">@Model.PublishDate.ToShortDateString()</dd>
+
+    <dt class="col-sm-3">Sayfa</dt>
+    <dd class="col-sm-9">@Model.PageCount</dd>
+
+    <dt class="col-sm-3">İkinci El</dt>
+    <dd class="col-sm-9">@((Model.IsSecondHand) ? "Evet" : "Hayır")</dd>
+</dl>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Evet, Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+</form>

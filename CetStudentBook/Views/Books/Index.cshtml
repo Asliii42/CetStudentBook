@@ -1,0 +1,54 @@
+﻿@model List<CetStudentBook.Models.Book>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>Kitaplar</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Kitap Ekle</a>
+</p>
+
+<table class="table-bordered">
+    <thead>
+    <tr>
+        <th>Ad</th>
+        <th>Yazar</th>
+        <th>Tarih</th>
+        <th>Sayfa</th>
+        <th>İkinci El</th>
+        <th>İşlem</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @if (Model == null || Model.Count == 0)
+    {
+        <tr>
+            <td colspan="6">Henüz kitap yok.</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.Name</td>
+                <td>@b.Author</td>
+                <td>@b.PublishDate.ToShortDateString()</td>
+                <td>@b.PageCount</td>
+                <td>@(b.IsSecondHand ? "Evet" : "Hayır")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@b.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id
+                       ="@b.Id">Delete</a>
+                </td>
+            </tr>
+            
+        }
+    }
+    </tbody>
+
+</table>
+
+
